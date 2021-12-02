@@ -17,7 +17,7 @@ print(answer2)
 
 
 # Investigating lead/lag to remove loops
-
+x <- scan("GitHub/AdventOfCode/2021/data/day1.txt")
 y <- lead(x,1)
 z = x-y
 sum((z < 0)[-len])
