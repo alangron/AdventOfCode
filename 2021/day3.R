@@ -53,8 +53,5 @@ x <- read.csv("GitHub/AdventOfCode/2021/data/day3_example.csv",header = FALSE,co
   separate(V1, c("V1","V2",'V3','V4','V5'),sep=c(1:4)) %>%
 mutate_if(is.character,as.numeric)
 
-test <- -1
-
-x[order(x[,1], test*x[,2], x[,3] , x[,4] , x[,5]), ]
 
 
