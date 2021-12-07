@@ -1,6 +1,6 @@
 library(tidyverse)
 
-x <- scan("GitHub/AdventOfCode/2021/data/day6.csv", what="", sep=",")
+x <- scan("GitHub/AdventOfCode/2021/data/day6.csv", sep=",")
 x <- as.numeric(unlist(x))
 
 count0 <- as.double(length(x[x==0]))
