@@ -5,7 +5,7 @@ x <- as.numeric(unlist(x))
 
 
 answer <- 9999999999
-for (i in c(1:99999)) {
+for (i in c(1:max(x))) {
   if (sum(abs(x - i)) < answer) {
     answer <- sum(abs(x - i))
   }
@@ -14,7 +14,7 @@ print(answer)
 
 
 answer <- 9999999999
-for (i in c(1:99999)) {
+for (i in c(1:max(x))) {
   diff <- abs(x - i)
   test <- sum((diff+1)*((diff-1)/2)+(diff+1)/2)
   if (test < answer) {
@@ -22,4 +22,5 @@ for (i in c(1:99999)) {
   }
 }
 print(answer)
+
 
