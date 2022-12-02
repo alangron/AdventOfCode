@@ -6,81 +6,52 @@ filename = "Data/day2.csv"
 df = pd.read_csv(filename, sep='\s+')
 
 # Part 1
-for x in range(0,len(df)):
 
-    if df.loc[x,'col1'] == 'A':
-        if df.loc[x,'col2'] == 'X':
-            df.loc[x,'result'] = 3
-        if df.loc[x,'col2'] == 'Y':
-            df.loc[x,'result'] = 6
-        if df.loc[x,'col2'] == 'Z':
-            df.loc[x,'result'] = 0
-        
-    
-    
-    if df.loc[x,'col1'] == 'B':
-        if df.loc[x,'col2'] == 'X':
-            df.loc[x,'result'] = 0
-        if df.loc[x,'col2'] == 'Y':
-            df.loc[x,'result'] = 3
-        if df.loc[x,'col2'] == 'Z':
-            df.loc[x,'result'] = 6
-            
-    if df.loc[x,'col1'] == 'C':
-        if df.loc[x,'col2'] == 'X':
-            df.loc[x,'result'] = 6
-        if df.loc[x,'col2'] == 'Y':
-            df.loc[x,'result'] = 0
-        if df.loc[x,'col2'] == 'Z':
-            df.loc[x,'result'] = 3
-        
-        
-    if df.loc[x,'col2'] == 'X':
-        df.loc[x,'score'] = 1    
-    if df.loc[x,'col2'] == 'Y':
-        df.loc[x,'score'] = 2    
-    if df.loc[x,'col2'] == 'Z':
+# Convert data to numeric and subtract them
+df = df.replace({'A','X'},'1').replace({'B','Y'},'2').replace({'C','Z'},'3')
+
+df['result'] = (df['col2'].astype(int) - df['col1'].astype(int)) % 3
+
+# A difference of 1 is a win, 0 is a draw and 2 is a loss
+for x in range(0,len(df)):
+    if df.loc[x,'result'] == 0:
         df.loc[x,'score'] = 3
+    if df.loc[x,'result'] == 1:
+        df.loc[x,'score'] = 6
+    if df.loc[x,'result'] == 2:
+        df.loc[x,'score'] = 0
         
-print(sum(df['score'])+sum(df['result']))
+print(sum(df['col2'].astype(int))+sum(df['score']))
+        
 
 # Part 2
 df = pd.read_csv(filename, sep='\s+')
 
+df = df.replace({'A'},'1').replace({'B'},'2').replace({'C'},'3')
+df = df.replace({'X'},'-1').replace({'Y'},'0').replace({'Z'},'1')
+
+df['pick'] = (df['col2'].astype(int) + df['col1'].astype(int)) % 3
+
 for x in range(0,len(df)):
+    if df.loc[x,'pick'] == 0:
+        df.loc[x,'pick'] = 3
+         
+for x in range(0,len(df)):
+    if df.loc[x,'col2'] == '-1':
+        df.loc[x,'score'] = 0
+    if df.loc[x,'col2'] == '0':
+        df.loc[x,'score'] = 3
+    if df.loc[x,'col2'] == '1':
+        df.loc[x,'score'] = 6
+         
+         
+print(sum(df['pick'].astype(int))+sum(df['score']))
+         
 
-    if df.loc[x,'col1'] == 'A':
-        if df.loc[x,'col2'] == 'X':
-            df.loc[x,'score'] = 3
-            df.loc[x,'result'] = 0
-        if df.loc[x,'col2'] == 'Y':
-            df.loc[x,'score'] = 1
-            df.loc[x,'result'] = 3
-        if df.loc[x,'col2'] == 'Z':
-            df.loc[x,'score'] = 2
-            df.loc[x,'result'] = 6
+       
         
-    if df.loc[x,'col1'] == 'B':
-        if df.loc[x,'col2'] == 'X':
-            df.loc[x,'score'] = 1
-            df.loc[x,'result'] = 0
-        if df.loc[x,'col2'] == 'Y':
-            df.loc[x,'score'] = 2
-            df.loc[x,'result'] = 3
-        if df.loc[x,'col2'] == 'Z':
-            df.loc[x,'score'] = 3
-            df.loc[x,'result'] = 6
         
-    if df.loc[x,'col1'] == 'C':
-        if df.loc[x,'col2'] == 'X':
-            df.loc[x,'score'] = 2
-            df.loc[x,'result'] = 0
-        if df.loc[x,'col2'] == 'Y':
-            df.loc[x,'score'] = 3
-            df.loc[x,'result'] = 3
-        if df.loc[x,'col2'] == 'Z':
-            df.loc[x,'score'] = 1
-            df.loc[x,'result'] = 6
         
-print(sum(df['score'])+sum(df['result']))
-
+        
+        
+        
